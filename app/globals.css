@@ -325,9 +325,22 @@ button{font-family:inherit;cursor:pointer}
   .footer-cols{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width: 720px){
-  :root{--pad:24px}
-  .nav-inner{grid-template-columns:auto auto;gap:18px}
+  :root{--pad:20px}
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px var(--pad);gap:12px
+  }
   .nav-links{display:none}
+  .logo-sub{display:none}
+  .logo-word{font-size:20px}
+  .logo-mark{width:38px;height:38px;font-size:15px}
+  .ghost-btn{padding:7px 10px;font-size:10px}
+  /* Filter bar – stack each group vertically */
+  .filter-bar{flex-direction:column;gap:14px;align-items:stretch}
+  .filter-group{flex-direction:column;align-items:flex-start;gap:6px}
+  .filter-spacer{display:none}
+  .sort-select{align-self:flex-start}
+  /* Grids */
   .tcard-grid{grid-template-columns:1fr}
   .step-grid{grid-template-columns:1fr}
   .step{border-right:none;border-bottom:1px solid var(--line)}

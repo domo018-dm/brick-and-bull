@@ -8,6 +8,23 @@ function getClient() {
   return createClient(url, key)
 }
 
+export async function getTruckById(id: string): Promise<Truck | null> {
+  const supabase = getClient()
+  if (!supabase) return null
+
+  const { data, error } = await supabase
+    .from('trucks')
+    .select('*')
+    .eq('id', id)
+    .single()
+
+  if (error) {
+    console.error('Failed to fetch truck:', error.message)
+    return null
+  }
+  return data as Truck
+}
+
 export async function getLatestTruck(): Promise<Truck | null> {
   const supabase = getClient()
   if (!supabase) return null

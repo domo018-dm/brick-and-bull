@@ -6,5 +6,5 @@ import { TruckCard } from './TruckCard'
 
 export function FeaturedCard({ truck }: { truck: Truck }) {
   const { saved, toggle } = useSaved()
-  return <TruckCard truck={truck} saved={saved.has(truck.id)} onToggle={toggle} />
+  return <TruckCard truck={truck} saved={saved.has(truck.id)} onToggle={toggle} featured />
 }

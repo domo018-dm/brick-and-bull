@@ -10,9 +10,10 @@ interface Props {
   truck: Truck
   saved: boolean
   onToggle: (id: string) => void
+  featured?: boolean
 }
 
-export function TruckCard({ truck: t, saved, onToggle }: Props) {
+export function TruckCard({ truck: t, saved, onToggle, featured }: Props) {
   return (
     <article className={`tcard tcard-${t.status}`}>
       <div className="tcard-img">
@@ -35,6 +36,7 @@ export function TruckCard({ truck: t, saved, onToggle }: Props) {
             </div>
           </Hatched>
         )}
+        {featured && <div className="tcard-featured">FEATURED</div>}
         <button
           className={`save-btn ${saved ? 'is-saved' : ''}`}
           onClick={() => onToggle(t.id)}
@@ -62,7 +64,7 @@ export function TruckCard({ truck: t, saved, onToggle }: Props) {
         </dl>
         <div className="tcard-foot">
           <span className="mono tcard-id">B&amp;B / {t.id.toUpperCase()}</span>
-          <a className="tcard-view" href={`#${t.id}`}>View truck <span className="arr">→</span></a>
+          <a className="tcard-view" href={`/trucks/${t.id}`}>View truck <span className="arr">→</span></a>
         </div>
       </div>
     </article>

@@ -39,7 +39,7 @@ export function SellCTA() {
           </ul>
           <div className="sell-call">
             <span className="mono">Or call directly</span>
-            <a href="tel:6025550142" className="sell-phone">(602) 555-0142</a>
+            <a href="tel:5052049009" className="sell-phone">(505) 204-9009</a>
           </div>
         </div>
         <form className="sell-form" onSubmit={e => { e.preventDefault(); setStep(1) }}>

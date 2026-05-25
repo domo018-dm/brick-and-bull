@@ -10,11 +10,11 @@ export function Footer() {
             </span>
           </div>
           <p className="footer-blurb">
-            Independent dealer. Licensed in AZ &amp; NM. We don&apos;t take consignment from
+            Independent dealer. Licensed in AZ, TX, CO, NM, UT, OK, KS &amp; AR. We don&apos;t take consignment from
             anyone whose paperwork we couldn&apos;t audit ourselves.
           </p>
           <div className="footer-licenses mono">
-            AZ DEALER LIC. #L00329472 · NM DEALER LIC. #58102 · BBB A+ · NIADA MEMBER
+            AZ #L00329472 · TX #TDB50291 · CO #IM2481 · NM #58102 · OK #VD-8831 · BBB A+ · NIADA MEMBER
           </div>
         </div>
         <div className="footer-cols">
@@ -36,12 +36,11 @@ export function Footer() {
             <h4>Resources</h4>
             <a href="#eras">Era guide</a>
             <a href="#">Inspection checklist</a>
-            <a href="#">Financing</a>
             <a href="#">Shipping</a>
           </div>
           <div className="footer-col">
             <h4>Contact</h4>
-            <a href="tel:6025550142">(602) 555-0142</a>
+            <a href="tel:5052049009">(505) 204-9009</a>
             <a href="mailto:trucks@brickbull.co">trucks@brickbull.co</a>
             <span>4218 W Buckeye Rd</span>
             <span>Phoenix, AZ 85009</span>

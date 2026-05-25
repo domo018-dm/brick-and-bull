@@ -113,6 +113,18 @@ button{font-family:inherit;cursor:pointer}
 .hero-centered .hero-ctas{justify-content:center;margin-bottom:48px}
 .hero-portrait-wide{aspect-ratio:21/8;border:1px solid var(--line);position:relative;overflow:hidden;margin-top:48px}
 
+/* Hero portrait photo overlay */
+.hero-portrait--photo::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(to bottom, rgba(21,17,14,.58) 0%, transparent 38%),
+    linear-gradient(to top,    rgba(21,17,14,.65) 0%, transparent 38%);
+}
+.hero-portrait--photo .portrait-meta{z-index:2}
+.hero-portrait--photo .kv b{color:var(--bg)}
+.hero-portrait--photo .kv span{color:rgba(241,236,226,.6)}
+.hero-portrait--photo .portrait-meta.bot .mono{color:rgba(241,236,226,.82)}
+
 /* ── Stats strip */
 .stats-strip{background:var(--fg);color:var(--bg);display:grid;
   grid-template-columns:repeat(4,1fr);max-width:100%;border-top:1px solid var(--fg)}

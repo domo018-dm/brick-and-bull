@@ -40,7 +40,7 @@ export function Hero({ truck }: Props) {
         </div>
       </div>
       <div className="hero-r">
-        <div className="hero-portrait">
+        <div className={`hero-portrait${truck?.image_url ? ' hero-portrait--photo' : ''}`}>
           {truck?.image_url ? (
             <Image
               src={truck.image_url}

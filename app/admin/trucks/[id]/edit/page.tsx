@@ -4,8 +4,9 @@ import { TruckForm } from '@/components/admin/TruckForm'
 
 export const metadata = { title: 'Edit Truck — B&B Admin' }
 
-export default async function EditTruckPage({ params }: { params: { id: string } }) {
-  const truck = await getTruckById(params.id)
+export default async function EditTruckPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const truck = await getTruckById(id)
   if (!truck) notFound()
 
   return (

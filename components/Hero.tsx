@@ -41,38 +41,38 @@ export function Hero({ truck }: Props) {
       </div>
       <div className="hero-r">
         <div className="hero-portrait">
-          <Hatched>
-            {truck && (
-              <div className="portrait-meta top-l">
-                <div className="kv"><span>YEAR</span><b>{truck.year}</b></div>
-                <div className="kv"><span>ENGINE</span><b>{truck.engine}</b></div>
-                <div className="kv"><span>COLOR</span><b>{truck.color}</b></div>
-              </div>
-            )}
-            <div className="portrait-meta top-r">
-              <span className="era-tag">{eraLabel}</span>
-            </div>
-            <div className="portrait-truck">
-              {truck?.image_url ? (
-                <Image
-                  src={truck.image_url}
-                  alt={`${truck.year} Ford ${truck.model} ${truck.trim}`}
-                  fill
-                  className="tcard-photo"
-                  sizes="(max-width: 720px) 100vw, 50vw"
-                  priority
-                />
-              ) : (
+          {truck?.image_url ? (
+            <Image
+              src={truck.image_url}
+              alt={`${truck.year} Ford ${truck.model} ${truck.trim}`}
+              fill
+              className="tcard-photo"
+              sizes="(max-width: 720px) 100vw, 50vw"
+              priority
+            />
+          ) : (
+            <Hatched>
+              <div className="portrait-truck">
                 <TruckSilhouette era={era} style={{ width: '78%', color: 'var(--fg)' }} />
-              )}
-            </div>
-            {truck && (
-              <div className="portrait-meta bot">
-                <span className="mono">{bottomDesc}</span>
-                <span className="mono">{truck.location}</span>
               </div>
-            )}
-          </Hatched>
+            </Hatched>
+          )}
+          {truck && (
+            <div className="portrait-meta top-l">
+              <div className="kv"><span>YEAR</span><b>{truck.year}</b></div>
+              <div className="kv"><span>ENGINE</span><b>{truck.engine}</b></div>
+              <div className="kv"><span>COLOR</span><b>{truck.color}</b></div>
+            </div>
+          )}
+          <div className="portrait-meta top-r">
+            <span className="era-tag">{eraLabel}</span>
+          </div>
+          {truck && (
+            <div className="portrait-meta bot">
+              <span className="mono">{bottomDesc}</span>
+              <span className="mono">{truck.location}</span>
+            </div>
+          )}
         </div>
       </div>
     </section>

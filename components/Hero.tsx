@@ -1,7 +1,19 @@
+import type { Truck } from '@/types/truck'
 import { Hatched } from './Hatched'
 import { TruckSilhouette } from './TruckSilhouette'
 
-export function Hero() {
+interface Props {
+  truck: Truck | null
+}
+
+export function Hero({ truck }: Props) {
+  const era = truck?.era ?? 'brick'
+  const eraLabel = truck?.era_label ?? 'BRICKNOSE'
+
+  const bottomDesc = truck
+    ? `${truck.model} ${truck.trim} · ${truck.drive} · ${truck.trans} · ${truck.miles.toLocaleString()} MI`
+    : null
+
   return (
     <section className="hero hero-split">
       <div className="hero-l">
@@ -29,21 +41,25 @@ export function Hero() {
       <div className="hero-r">
         <div className="hero-portrait">
           <Hatched>
-            <div className="portrait-meta top-l">
-              <div className="kv"><span>VIN</span><b>1FTHF26G6HKA48201</b></div>
-              <div className="kv"><span>YEAR</span><b>1987</b></div>
-              <div className="kv"><span>ENGINE</span><b>7.5L 460 V8</b></div>
-            </div>
+            {truck && (
+              <div className="portrait-meta top-l">
+                <div className="kv"><span>YEAR</span><b>{truck.year}</b></div>
+                <div className="kv"><span>ENGINE</span><b>{truck.engine}</b></div>
+                <div className="kv"><span>COLOR</span><b>{truck.color}</b></div>
+              </div>
+            )}
             <div className="portrait-meta top-r">
-              <span className="era-tag">BRICKNOSE</span>
+              <span className="era-tag">{eraLabel}</span>
             </div>
             <div className="portrait-truck">
-              <TruckSilhouette era="brick" style={{ width: '78%', color: 'var(--fg)' }} />
+              <TruckSilhouette era={era} style={{ width: '78%', color: 'var(--fg)' }} />
             </div>
-            <div className="portrait-meta bot">
-              <span className="mono">F-250 XLT LARIAT · 4×4 · 5-SPD ZF · 84,200 MI</span>
-              <span className="mono">PHOENIX, AZ</span>
-            </div>
+            {truck && (
+              <div className="portrait-meta bot">
+                <span className="mono">{bottomDesc}</span>
+                <span className="mono">{truck.location}</span>
+              </div>
+            )}
           </Hatched>
         </div>
       </div>

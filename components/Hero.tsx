@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { Truck } from '@/types/truck'
 import { Hatched } from './Hatched'
 import { TruckSilhouette } from './TruckSilhouette'
@@ -52,7 +53,18 @@ export function Hero({ truck }: Props) {
               <span className="era-tag">{eraLabel}</span>
             </div>
             <div className="portrait-truck">
-              <TruckSilhouette era={era} style={{ width: '78%', color: 'var(--fg)' }} />
+              {truck?.image_url ? (
+                <Image
+                  src={truck.image_url}
+                  alt={`${truck.year} Ford ${truck.model} ${truck.trim}`}
+                  fill
+                  className="tcard-photo"
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                  priority
+                />
+              ) : (
+                <TruckSilhouette era={era} style={{ width: '78%', color: 'var(--fg)' }} />
+              )}
             </div>
             {truck && (
               <div className="portrait-meta bot">

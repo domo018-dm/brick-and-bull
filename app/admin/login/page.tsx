@@ -2,11 +2,12 @@ import { loginAction } from '@/lib/actions'
 
 export const metadata = { title: 'Admin Login — Brick & Bull' }
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: { error?: string }
+  searchParams: Promise<{ error?: string }>
 }) {
+  const { error } = await searchParams
   return (
     <div className="admin-login-wrap">
       <div className="admin-login-card">
@@ -25,7 +26,7 @@ export default function LoginPage({
               placeholder="Enter admin password"
             />
           </label>
-          {searchParams.error && (
+          {error && (
             <p className="admin-login-error mono">Incorrect password — try again.</p>
           )}
           <button className="btn btn-primary" type="submit" style={{ width: '100%', justifyContent: 'center' }}>

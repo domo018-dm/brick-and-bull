@@ -193,7 +193,7 @@ button{font-family:inherit;cursor:pointer}
   border:4px solid currentColor;padding:8px 18px;z-index:3;background:rgba(241,236,226,.92)}
 .stamp-sold{color:var(--accent-deep)}
 .stamp-pending{color:var(--fg-2);font-size:32px;letter-spacing:.06em}
-.stamp-coming_soon{color:var(--fg);font-size:28px;letter-spacing:.04em}
+.stamp-coming_soon{color:var(--fg);font-size:18px;letter-spacing:.08em;transform:translate(-50%,-50%);white-space:nowrap}
 
 .tcard-featured{position:absolute;bottom:12px;left:12px;font-family:var(--display);font-weight:800;
   font-size:11px;letter-spacing:.08em;background:var(--accent);color:var(--ink-on-accent);

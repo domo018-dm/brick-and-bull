@@ -1,10 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useTransition, useRef } from 'react'
+import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Truck } from '@/types/truck'
-import { createTruckAction, updateTruckAction, uploadImageAction, enhanceDescriptionAction } from '@/lib/actions'
+import { createTruckAction, updateTruckAction, uploadImageAction } from '@/lib/actions'
 import { CameraCapture } from './CameraCapture'
 
 interface ImageSlot { url: string; uploading: boolean }
@@ -21,9 +21,6 @@ export function TruckForm({ truck }: Props) {
   const [urlInput, setUrlInput] = useState('')
   const [showCamera, setShowCamera] = useState(false)
   const [description, setDescription] = useState(truck?.description ?? '')
-  const [isEnhancing, setIsEnhancing] = useState(false)
-  const [enhanceErr, setEnhanceErr] = useState<string | null>(null)
-  const formRef = useRef<HTMLFormElement>(null)
 
   const [images, setImages] = useState<ImageSlot[]>(() => {
     if (truck?.images && truck.images.length > 0) {
@@ -61,24 +58,6 @@ export function TruckForm({ truck }: Props) {
     setImages(prev => prev.filter((_, i) => i !== idx))
   }
 
-  async function handleEnhance() {
-    if (!description.trim()) return
-    setEnhanceErr(null)
-    setIsEnhancing(true)
-    const fd = formRef.current
-    const year  = fd ? (fd.elements.namedItem('year')  as HTMLInputElement)?.value  : ''
-    const model = fd ? (fd.elements.namedItem('model') as HTMLSelectElement)?.value : ''
-    const engine = fd ? (fd.elements.namedItem('engine') as HTMLInputElement)?.value : ''
-    const context = [year, model, engine].filter(Boolean).join(' ')
-    const result = await enhanceDescriptionAction(description, context)
-    if ('text' in result) {
-      setDescription(result.text)
-    } else {
-      setEnhanceErr(result.error)
-    }
-    setIsEnhancing(false)
-  }
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError(null)
@@ -100,7 +79,7 @@ export function TruckForm({ truck }: Props) {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="admin-form">
+    <form onSubmit={handleSubmit} className="admin-form">
       {isEdit && <input type="hidden" name="_id" value={truck!.id} />}
 
       {/* ── Identity */}
@@ -177,18 +156,6 @@ export function TruckForm({ truck }: Props) {
             value={description}
             onChange={e => setDescription(e.target.value)}
           />
-        </div>
-        <div className="admin-enhance-row">
-          <button
-            type="button"
-            className="btn btn-ghost admin-enhance-btn"
-            onClick={handleEnhance}
-            disabled={isEnhancing || !description.trim()}
-          >
-            {isEnhancing ? 'Enhancing…' : 'Enhance with AI'}
-            {!isEnhancing && <span className="arr">→</span>}
-          </button>
-          {enhanceErr && <span className="admin-enhance-err mono">{enhanceErr}</span>}
         </div>
       </div>
 

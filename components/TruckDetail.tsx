@@ -1,7 +1,5 @@
-import Image from 'next/image'
 import type { Truck } from '@/types/truck'
-import { Hatched } from './Hatched'
-import { TruckSilhouette } from './TruckSilhouette'
+import { ImageGallery } from './ImageGallery'
 
 function fmt$(n: number) { return '$' + n.toLocaleString('en-US') }
 function fmtMi(n: number) { return n.toLocaleString('en-US') + ' mi' }
@@ -30,31 +28,8 @@ export function TruckDetail({ truck: t }: { truck: Truck }) {
 
       <div className="tdetail-hero">
 
-        {/* ── Left: image */}
-        <div className="tdetail-media">
-          {t.image_url ? (
-            <Image
-              src={t.image_url}
-              alt={`${t.year} Ford ${t.model} ${t.trim}`}
-              fill
-              className="tcard-photo"
-              sizes="(max-width: 720px) 100vw, (max-width: 1100px) 100vw, 62vw"
-              priority
-            />
-          ) : (
-            <Hatched>
-              <div className="tdetail-silhouette">
-                <TruckSilhouette era={t.era} style={{ width: '70%', color: 'var(--fg)' }} />
-              </div>
-            </Hatched>
-          )}
-          <div className="tcard-era">{t.era_label}</div>
-          {t.status !== 'available' && (
-            <div className={`status-stamp stamp-${t.status}`}>
-              {t.status === 'sold' ? 'SOLD' : t.status === 'coming_soon' ? 'COMING SOON' : 'PENDING'}
-            </div>
-          )}
-        </div>
+        {/* ── Left: image gallery */}
+        <ImageGallery truck={t} />
 
         {/* ── Right: info panel */}
         <div className="tdetail-panel">

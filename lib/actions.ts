@@ -59,18 +59,49 @@ async function uploadToCloudinary(file: File): Promise<string> {
   return data.secure_url as string
 }
 
+export async function uploadImageAction(
+  formData: FormData,
+): Promise<{ url: string } | { error: string }> {
+  try {
+    const file = formData.get('file') as File | null
+    if (!file || file.size === 0) return { error: 'No file provided' }
+    const url = await uploadToCloudinary(file)
+    return { url }
+  } catch (e) {
+    return { error: (e as Error).message }
+  }
+}
+
+// ── Image helpers ─────────────────────────────────────────────────────────────
+
+function getImageUrls(formData: FormData): string[] {
+  const count = parseInt((formData.get('image_count') as string) ?? '0', 10)
+  const urls: string[] = []
+  for (let i = 0; i < count; i++) {
+    const u = ((formData.get(`image_url_${i}`) as string) ?? '').trim()
+    if (u) urls.push(u)
+  }
+  return urls
+}
+
+type AdminClient = ReturnType<typeof getAdminClient>
+
+async function insertImages(supabase: AdminClient, truckId: string, urls: string[]) {
+  if (urls.length === 0) return
+  await supabase.from('truck_images').insert(
+    urls.map((url, position) => ({ truck_id: truckId, url, position })),
+  )
+}
+
+async function replaceImages(supabase: AdminClient, truckId: string, urls: string[]) {
+  await supabase.from('truck_images').delete().eq('truck_id', truckId)
+  await insertImages(supabase, truckId, urls)
+}
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function eraLabel(era: string) {
   return era === 'bull' ? 'BULLNOSE' : 'BRICKNOSE'
-}
-
-async function resolveImageUrl(formData: FormData): Promise<string | null> {
-  const file = formData.get('image') as File | null
-  if (file && file.size > 0) return uploadToCloudinary(file)
-  const manual = ((formData.get('image_url_manual') as string) ?? '').trim()
-  if (manual) return manual
-  return ((formData.get('existing_image_url') as string) ?? '').trim() || null
 }
 
 function pickFields(formData: FormData) {
@@ -101,14 +132,16 @@ export async function createTruckAction(
 ): Promise<{ error: string } | { success: true }> {
   const supabase = getAdminClient()
   try {
-    const image_url = await resolveImageUrl(formData)
+    const id = (formData.get('id') as string).trim()
+    const imageUrls = getImageUrls(formData)
     const truck: Record<string, unknown> = {
-      id: (formData.get('id') as string).trim(),
+      id,
       ...pickFields(formData),
-      image_url,
+      image_url: imageUrls[0] ?? null,
     }
     const { error } = await supabase.from('trucks').insert(truck)
     if (error) return { error: error.message }
+    await insertImages(supabase, id, imageUrls)
     revalidatePath('/')
     revalidatePath('/admin')
     return { success: true }
@@ -123,10 +156,14 @@ export async function updateTruckAction(
   const supabase = getAdminClient()
   const id = formData.get('_id') as string
   try {
-    const image_url = await resolveImageUrl(formData)
-    const updates     = { ...pickFields(formData), image_url }
-    const { error }   = await supabase.from('trucks').update(updates).eq('id', id)
+    const imageUrls = getImageUrls(formData)
+    const updates = {
+      ...pickFields(formData),
+      image_url: imageUrls[0] ?? null,
+    }
+    const { error } = await supabase.from('trucks').update(updates).eq('id', id)
     if (error) return { error: error.message }
+    await replaceImages(supabase, id, imageUrls)
     revalidatePath('/')
     revalidatePath('/admin')
     revalidatePath(`/trucks/${id}`)

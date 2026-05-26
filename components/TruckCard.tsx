@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import type { Truck } from '@/types/truck'
 import { Hatched } from './Hatched'
@@ -14,13 +17,32 @@ interface Props {
 }
 
 export function TruckCard({ truck: t, saved, onToggle, featured }: Props) {
+  const allImages = t.images && t.images.length > 0
+    ? t.images.map(i => i.url)
+    : t.image_url
+    ? [t.image_url]
+    : []
+
+  const [imgIdx, setImgIdx] = useState(0)
+  const currentImage = allImages[imgIdx] ?? null
+  const hasMultiple = allImages.length > 1
+
+  function prev(e: React.MouseEvent) {
+    e.preventDefault(); e.stopPropagation()
+    setImgIdx(i => (i - 1 + allImages.length) % allImages.length)
+  }
+  function next(e: React.MouseEvent) {
+    e.preventDefault(); e.stopPropagation()
+    setImgIdx(i => (i + 1) % allImages.length)
+  }
+
   return (
     <article className={`tcard tcard-${t.status}`}>
       <div className="tcard-img">
-        {t.image_url ? (
+        {currentImage ? (
           <>
             <Image
-              src={t.image_url}
+              src={currentImage}
               alt={`${t.year} Ford ${t.model} ${t.trim}`}
               fill
               className="tcard-photo"
@@ -36,10 +58,23 @@ export function TruckCard({ truck: t, saved, onToggle, featured }: Props) {
             </div>
           </Hatched>
         )}
+
+        {hasMultiple && (
+          <>
+            <button className="tcard-arr tcard-arr--prev" onClick={prev} aria-label="Previous image">‹</button>
+            <button className="tcard-arr tcard-arr--next" onClick={next} aria-label="Next image">›</button>
+            <div className="tcard-dots">
+              {allImages.map((_, i) => (
+                <span key={i} className={`tcard-dot${i === imgIdx ? ' is-active' : ''}`} />
+              ))}
+            </div>
+          </>
+        )}
+
         {featured && <div className="tcard-featured">FEATURED</div>}
         <button
           className={`save-btn ${saved ? 'is-saved' : ''}`}
-          onClick={() => onToggle(t.id)}
+          onClick={e => { e.preventDefault(); e.stopPropagation(); onToggle(t.id) }}
           aria-label={saved ? 'Unsave' : 'Save'}
         >
           {saved ? '★' : '☆'}

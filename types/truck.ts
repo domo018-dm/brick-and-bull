@@ -1,3 +1,10 @@
+export interface TruckImage {
+  id: string
+  truck_id: string
+  url: string
+  position: number
+}
+
 export interface Truck {
   id: string
   era: 'bull' | 'brick'
@@ -17,4 +24,5 @@ export interface Truck {
   image_url: string | null
   tone: string | null
   created_at: string
+  images?: TruckImage[]
 }

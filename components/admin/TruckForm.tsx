@@ -1,10 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import { useState, useRef, useTransition } from 'react'
+import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Truck } from '@/types/truck'
-import { createTruckAction, updateTruckAction } from '@/lib/actions'
+import { createTruckAction, updateTruckAction, uploadImageAction } from '@/lib/actions'
+
+interface ImageSlot { url: string; uploading: boolean }
 
 interface Props {
   truck?: Truck
@@ -15,21 +17,54 @@ export function TruckForm({ truck }: Props) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
-  const [preview, setPreview] = useState<string | null>(truck?.image_url ?? null)
-  const fileRef = useRef<HTMLInputElement>(null)
+  const [urlInput, setUrlInput] = useState('')
 
-  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+  const [images, setImages] = useState<ImageSlot[]>(() => {
+    if (truck?.images && truck.images.length > 0) {
+      return truck.images.map(i => ({ url: i.url, uploading: false }))
+    }
+    if (truck?.image_url) return [{ url: truck.image_url, uploading: false }]
+    return []
+  })
+
+  async function handleFileAdd(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
-    if (file) setPreview(URL.createObjectURL(file))
+    if (!file) return
+    const slotIdx = images.length
+    setImages(prev => [...prev, { url: '', uploading: true }])
+    const fd = new FormData()
+    fd.append('file', file)
+    const result = await uploadImageAction(fd)
+    if ('url' in result) {
+      setImages(prev => prev.map((img, i) => i === slotIdx ? { url: result.url, uploading: false } : img))
+    } else {
+      setImages(prev => prev.filter((_, i) => i !== slotIdx))
+      setError(result.error)
+    }
+    e.target.value = ''
+  }
+
+  function addUrl() {
+    const u = urlInput.trim()
+    if (!u) return
+    setImages(prev => [...prev, { url: u, uploading: false }])
+    setUrlInput('')
+  }
+
+  function removeImage(idx: number) {
+    setImages(prev => prev.filter((_, i) => i !== idx))
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setError(null)
-    const formData = new FormData(e.currentTarget)
+    const fd = new FormData(e.currentTarget)
+    const valid = images.filter(i => i.url && !i.uploading)
+    fd.set('image_count', String(valid.length))
+    valid.forEach((img, i) => fd.set(`image_url_${i}`, img.url))
     startTransition(async () => {
       const action = isEdit ? updateTruckAction : createTruckAction
-      const result = await action(formData)
+      const result = await action(fd)
       if (result && 'error' in result) {
         setError(result.error)
       } else {
@@ -42,8 +77,6 @@ export function TruckForm({ truck }: Props) {
   return (
     <form onSubmit={handleSubmit} className="admin-form">
       {isEdit && <input type="hidden" name="_id" value={truck!.id} />}
-      {/* Preserve existing URL if no new file/URL is provided */}
-      <input type="hidden" name="existing_image_url" value={truck?.image_url ?? ''} />
 
       {/* ── Identity */}
       <div className="admin-form-section">
@@ -124,38 +157,61 @@ export function TruckForm({ truck }: Props) {
         </div>
       </div>
 
-      {/* ── Photo */}
+      {/* ── Images */}
       <div className="admin-form-section">
-        <h2 className="admin-form-section-title mono">Photo</h2>
-        <div className="admin-photo-wrap">
-          {preview && (
-            <div className="admin-photo-preview">
-              <Image src={preview} alt="Preview" fill className="tcard-photo" sizes="320px" />
-            </div>
-          )}
-          <div className="admin-photo-inputs">
-            <div className="field">
-              <span className="field-label mono">Upload new image</span>
-              <input
-                ref={fileRef}
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleFile}
-                className="admin-file-input"
-              />
-            </div>
-            <p className="admin-photo-or mono">— or paste URL —</p>
-            <div className="field">
+        <h2 className="admin-form-section-title mono">Images</h2>
+
+        {images.length > 0 && (
+          <div className="admin-img-grid">
+            {images.map((img, i) => (
+              <div key={i} className="admin-img-thumb">
+                {img.uploading ? (
+                  <div className="admin-img-uploading mono">uploading…</div>
+                ) : img.url ? (
+                  <Image src={img.url} alt="" fill className="tcard-photo" sizes="120px" />
+                ) : null}
+                {i === 0 && <span className="admin-img-primary mono">PRIMARY</span>}
+                <button
+                  type="button"
+                  className="admin-img-remove"
+                  onClick={() => removeImage(i)}
+                  aria-label="Remove image"
+                >×</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="admin-img-add">
+          <div className="field">
+            <span className="field-label mono">Upload file</span>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileAdd}
+              className="admin-file-input"
+              disabled={isPending}
+            />
+          </div>
+          <p className="admin-photo-or mono">— or paste a URL —</p>
+          <div className="admin-img-url-row">
+            <div className="field" style={{ flex: 1, marginBottom: 0 }}>
               <span className="field-label mono">Image URL</span>
               <input
                 type="url"
-                name="image_url_manual"
                 placeholder="https://res.cloudinary.com/…"
-                defaultValue=""
-                onFocus={() => { if (fileRef.current) fileRef.current.value = '' }}
+                value={urlInput}
+                onChange={e => setUrlInput(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addUrl() } }}
               />
             </div>
+            <button
+              type="button"
+              className="btn btn-ghost admin-img-add-btn"
+              onClick={addUrl}
+            >
+              Add <span className="arr">→</span>
+            </button>
           </div>
         </div>
       </div>

@@ -2,13 +2,13 @@ const STEPS = [
   {
     n: '01',
     t: 'FIND',
-    body: 'We hunt barn finds, estate sales, and private sellers across the Southwest. The rougher the deal, the more we like it.',
+    body: 'We hunt barn finds, estate sales, and private sellers across the Southwest. The more overlooked the truck, the better.',
     proof: 'Avg. 2 of every 11 trucks viewed are bought.',
   },
   {
     n: '02',
     t: 'FIX',
-    body: 'We go through the drivetrain, brakes, and running gear until each truck starts reliably, drives safely, and stops like it should.',
+    body: 'We go through the entire truck — engine, trans, brakes, suspension, electrical, cooling — until it starts reliably, drives safely, and stops like it should.',
     proof: "Not a restoration shop — we fix what matters and leave the rest original.",
   },
   {

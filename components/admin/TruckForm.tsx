@@ -5,6 +5,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Truck } from '@/types/truck'
 import { createTruckAction, updateTruckAction, uploadImageAction } from '@/lib/actions'
+import { CameraCapture } from './CameraCapture'
 
 interface ImageSlot { url: string; uploading: boolean }
 
@@ -18,6 +19,7 @@ export function TruckForm({ truck }: Props) {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [urlInput, setUrlInput] = useState('')
+  const [showCamera, setShowCamera] = useState(false)
 
   const [images, setImages] = useState<ImageSlot[]>(() => {
     if (truck?.images && truck.images.length > 0) {
@@ -183,15 +185,24 @@ export function TruckForm({ truck }: Props) {
         )}
 
         <div className="admin-img-add">
-          <div className="field">
-            <span className="field-label mono">Upload file</span>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileAdd}
-              className="admin-file-input"
-              disabled={isPending}
-            />
+          <div className="admin-img-add-methods">
+            <div className="field">
+              <span className="field-label mono">Upload file</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileAdd}
+                className="admin-file-input"
+                disabled={isPending}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn btn-ghost admin-img-camera-btn"
+              onClick={() => setShowCamera(true)}
+            >
+              Use camera <span className="arr">→</span>
+            </button>
           </div>
           <p className="admin-photo-or mono">— or paste a URL —</p>
           <div className="admin-img-url-row">
@@ -217,6 +228,13 @@ export function TruckForm({ truck }: Props) {
       </div>
 
       {error && <p className="admin-form-error mono">{error}</p>}
+
+      {showCamera && (
+        <CameraCapture
+          onCapture={url => setImages(prev => [...prev, { url, uploading: false }])}
+          onClose={() => setShowCamera(false)}
+        />
+      )}
 
       <div className="admin-form-actions">
         <button type="submit" className="btn btn-primary" disabled={isPending}>

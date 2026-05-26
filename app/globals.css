@@ -563,6 +563,35 @@ button{font-family:inherit;cursor:pointer}
 .admin-img-add{display:flex;flex-direction:column;gap:12px}
 .admin-img-url-row{display:flex;gap:10px;align-items:flex-end}
 .admin-img-add-btn{align-self:flex-end;white-space:nowrap}
+.admin-img-add-methods{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.admin-img-camera-btn{white-space:nowrap;align-self:flex-end}
+
+/* Camera capture overlay */
+.camera-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:16px}
+.camera-modal{background:var(--fg);color:var(--bg);width:min(520px,96vw);
+  border-radius:2px;overflow:hidden;display:flex;flex-direction:column}
+.camera-head{display:flex;justify-content:space-between;align-items:center;
+  padding:12px 16px;border-bottom:1px solid rgba(241,236,226,.15)}
+.camera-head .mono{font-size:11px;letter-spacing:.1em;color:rgba(241,236,226,.65)}
+.camera-close{background:none;border:none;color:var(--bg);font-size:22px;cursor:pointer;
+  padding:0;line-height:1;opacity:.55;transition:opacity .12s}
+.camera-close:hover{opacity:1}
+.camera-viewport{position:relative;aspect-ratio:4/3;background:#000;overflow:hidden}
+.camera-video{width:100%;height:100%;object-fit:cover;display:block}
+.camera-preview-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.camera-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(241,236,226,.45);font-size:12px;letter-spacing:.06em;text-align:center;padding:24px}
+.camera-controls{padding:20px 16px;display:flex;align-items:center;justify-content:center;
+  min-height:84px;background:var(--fg)}
+.camera-shutter{width:56px;height:56px;border-radius:50%;background:var(--bg);
+  border:4px solid rgba(241,236,226,.22);cursor:pointer;
+  transition:transform .1s,border-color .1s}
+.camera-shutter:hover{transform:scale(1.06);border-color:rgba(241,236,226,.55)}
+.camera-shutter:active{transform:scale(.93)}
+.camera-review{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%}
+.camera-review-btns{display:flex;gap:12px}
+.camera-upload-err{color:var(--accent);font-size:11px;letter-spacing:.04em;margin:0}
 .admin-photo-or{font-size:10px;letter-spacing:.06em;color:var(--muted);margin:4px 0;text-align:center}
 .admin-file-input{font-size:13px;color:var(--fg-2);padding:10px 0;
   border:none;background:transparent;width:100%;cursor:pointer}

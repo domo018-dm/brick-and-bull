@@ -105,7 +105,14 @@ export function TruckForm({ truck }: Props) {
               ))}
             </select>
           </div>
-          <F label="Trim" name="trim" placeholder="XLT Lariat" defaultValue={truck?.trim} required />
+          <div className="field">
+            <span className="field-label mono">Trim</span>
+            <select name="trim" defaultValue={truck?.trim ?? 'XLT'} required>
+              {['Custom','XL','XLS','XLT','XLT Lariat','Lariat','S (Sport)','Special'].map(t => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -113,7 +120,14 @@ export function TruckForm({ truck }: Props) {
       <div className="admin-form-section">
         <h2 className="admin-form-section-title mono">Technical</h2>
         <div className="admin-form-grid">
-          <F label="Engine" name="engine" placeholder="7.5L 460 V8" defaultValue={truck?.engine} required />
+          <div className="field">
+            <span className="field-label mono">Engine</span>
+            <select name="engine" defaultValue={truck?.engine ?? '5.8L 351W V8'} required>
+              {['4.9L 300 I6','5.0L 302 V8','5.8L 351W V8','5.8L 351M V8','6.9L IDI Diesel','7.3L IDI Diesel','7.5L 460 V8'].map(e => (
+                <option key={e} value={e}>{e}</option>
+              ))}
+            </select>
+          </div>
           <div className="field">
             <span className="field-label mono">Drive</span>
             <select name="drive" defaultValue={truck?.drive ?? '4×4'} required>
@@ -121,7 +135,14 @@ export function TruckForm({ truck }: Props) {
               <option value="4×2">4×2</option>
             </select>
           </div>
-          <F label="Transmission" name="trans" placeholder="5-Spd ZF Manual" defaultValue={truck?.trans} required />
+          <div className="field">
+            <span className="field-label mono">Transmission</span>
+            <select name="trans" defaultValue={truck?.trans ?? '3-Spd C6 Auto'} required>
+              {['3-Spd C6 Auto','3-Spd C4 Auto','4-Spd AOD Auto','4-Spd E4OD Auto','4-Spd NP435 Manual','4-Spd Top Loader Manual','5-Spd ZF Manual','T18 4-Spd Manual','T19 4-Spd Manual'].map(t => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
           <div className="field">
             <span className="field-label mono">Cab Style</span>
             <select name="cab" defaultValue={truck?.cab ?? 'Regular'} required>

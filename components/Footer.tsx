@@ -6,16 +6,12 @@ export function Footer() {
           <a className="logo logo-foot" href="/">
             <span className="logo-stack">
               <span className="logo-word">BRICK <span className="amp">&amp;</span> BULL</span>
-              <span className="logo-sub">F-SERIES SPECIALISTS · EST. 2014</span>
+              <span className="logo-sub">F-SERIES SPECIALISTS · EST. 2023</span>
             </span>
           </a>
           <p className="footer-blurb">
-            Independent dealer. Licensed in AZ, TX, CO, NM, UT, OK, KS &amp; AR.
-            We find them cheap, get them right, and sell them straight.
+            Independent dealer. We find them cheap, get them right, and sell them straight.
           </p>
-          <div className="footer-licenses mono">
-            AZ #L00329472 · TX #TDB50291 · CO #IM2481 · NM #58102 · OK #VD-8831 · BBB A+ · NIADA MEMBER
-          </div>
         </div>
         <div className="footer-cols">
           <div className="footer-col">
@@ -48,7 +44,7 @@ export function Footer() {
         </div>
       </div>
       <div className="footer-bot">
-        <span className="mono">© 2014–2026 BRICK &amp; BULL TRUCK CO., LLC</span>
+        <span className="mono">© 2023–2026 BRICK &amp; BULL TRUCK CO., LLC</span>
         <span className="mono">PRIVACY · TERMS · CALIFORNIA NOTICE</span>
         <span className="mono">VINs &amp; IMAGES BY APPOINTMENT</span>
       </div>

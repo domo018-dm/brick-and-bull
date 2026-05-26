@@ -12,7 +12,7 @@ export function Nav() {
           <span className="logo-mark">B&amp;B</span>
           <span className="logo-stack">
             <span className="logo-word">BRICK <span className="amp">&amp;</span> BULL</span>
-            <span className="logo-sub">F-SERIES SPECIALISTS · EST. 2014</span>
+            <span className="logo-sub">F-SERIES SPECIALISTS · EST. 2023</span>
           </span>
         </a>
         <div className="nav-links">

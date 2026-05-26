@@ -1,8 +1,8 @@
 const STATS = [
   ['11', 'YEARS IN BUSINESS'],
   ['200+', 'TRUCKS SOLD'],
-  ['47', 'STATES DELIVERED'],
-  ['120', 'POINT INSPECTION'],
+  ['8', 'STATES LICENSED'],
+  ['80–91', 'F-SERIES ONLY'],
 ] as const
 
 export function StatsStrip() {

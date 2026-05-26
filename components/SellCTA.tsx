@@ -34,8 +34,8 @@ export function SellCTA() {
           <ul className="sell-bullets">
             <li><span className="mono">01</span> Tell us what you have</li>
             <li><span className="mono">02</span> We send a verbal range within 48 hours</li>
-            <li><span className="mono">03</span> Independent inspection at our cost</li>
-            <li><span className="mono">04</span> Wire transfer · enclosed pickup nationwide</li>
+            <li><span className="mono">03</span> We look it over and make a firm offer</li>
+            <li><span className="mono">04</span> Wire transfer or cash · you deliver or we arrange pickup</li>
           </ul>
           <div className="sell-call">
             <span className="mono">Or call directly</span>
@@ -59,7 +59,7 @@ export function SellCTA() {
               </div>
               <Field
                 label="Notes — drivetrain, rust, paperwork"
-                placeholder="7.3 IDI Diesel, 4×4, original owner, all service records, some rust on cab corners…"
+                placeholder="7.3 IDI Diesel, 4×4, runs and drives, some rust on cab corners…"
                 value={form.notes}
                 onChange={update('notes')}
                 textarea

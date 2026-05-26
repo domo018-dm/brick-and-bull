@@ -1,27 +1,27 @@
 const STEPS = [
   {
     n: '01',
-    t: 'SOURCE',
-    body: 'We buy from original owners, estates, and retiring fleets in the dry Southwest. No auction lane flips, no Carfax mysteries.',
+    t: 'FIND',
+    body: 'We hunt barn finds, estate sales, and private sellers across the Southwest. The rougher the deal, the more we like it.',
     proof: 'Avg. 2 of every 11 trucks viewed are bought.',
   },
   {
     n: '02',
-    t: 'INSPECT',
-    body: '120-point inspection by an independent ASE-certified Ford specialist. Frame, floors, cab corners, and rocker rust mapped and photographed.',
-    proof: "Inspection done off-site. We don't grade our own homework.",
+    t: 'FIX',
+    body: 'We go through the drivetrain, brakes, and running gear until each truck starts reliably, drives safely, and stops like it should.',
+    proof: "Not a restoration shop — we fix what matters and leave the rest original.",
   },
   {
     n: '03',
-    t: 'DOCUMENT',
-    body: 'Full photo set, undercarriage video, compression test, fluid analysis, and a written condition report. Every panel measured.',
-    proof: 'PDF delivered before you put down a deposit.',
+    t: 'PHOTOGRAPH',
+    body: 'We photograph every angle, note what we know about the truck\'s history, and write an honest description of condition.',
+    proof: 'Come look in person before you buy — always welcome.',
   },
   {
     n: '04',
-    t: 'DELIVER',
-    body: 'Enclosed transport to 47 states. We hand the keys over with a binder of receipts, the title, and a 30-day mechanical warranty.',
-    proof: '90% of buyers never see Phoenix.',
+    t: 'SELL',
+    body: 'Trucks sell as-is. Pick up in Phoenix or we can help coordinate transport. Clean title, fair price, no games.',
+    proof: 'What you see is what you get.',
   },
 ]
 
@@ -35,9 +35,8 @@ export function Process() {
         </div>
         <div className="section-head-r">
           <p className="section-lede">
-            The market is full of &quot;drives great&quot; and &quot;no issues.&quot; Our binder tells you which
-            two cab mounts are surface-rusted and exactly how the throttle position sensor
-            behaves at idle. We&apos;d rather lose a sale than mislead a buyer.
+            The market is full of &quot;drives great&quot; and &quot;no issues.&quot; We buy trucks cheap,
+            get them running right, and sell them honest. Simple as that.
           </p>
         </div>
       </header>

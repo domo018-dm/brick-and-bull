@@ -10,8 +10,8 @@ export function Footer() {
             </span>
           </div>
           <p className="footer-blurb">
-            Independent dealer. Licensed in AZ, TX, CO, NM, UT, OK, KS &amp; AR. We don&apos;t take consignment from
-            anyone whose paperwork we couldn&apos;t audit ourselves.
+            Independent dealer. Licensed in AZ, TX, CO, NM, UT, OK, KS &amp; AR.
+            We find them cheap, get them right, and sell them straight.
           </p>
           <div className="footer-licenses mono">
             AZ #L00329472 · TX #TDB50291 · CO #IM2481 · NM #58102 · OK #VD-8831 · BBB A+ · NIADA MEMBER
@@ -35,8 +35,8 @@ export function Footer() {
           <div className="footer-col">
             <h4>Resources</h4>
             <a href="#eras">Era guide</a>
-            <a href="#">Inspection checklist</a>
-            <a href="#">Shipping</a>
+            <a href="#">Buyer FAQ</a>
+            <a href="#">Transport info</a>
           </div>
           <div className="footer-col">
             <h4>Contact</h4>

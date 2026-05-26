@@ -62,8 +62,8 @@ export function Inventory({ initialTrucks }: Props) {
         </div>
         <div className="section-head-r">
           <p className="section-lede">
-            Every truck is independently inspected, road-tested, and documented before it
-            wears our badge. Reserve with a refundable deposit; we hold for 7 days.
+            Every truck runs, drives, and stops before it wears our badge.
+            Reserve with a refundable deposit; we hold for 7 days.
           </p>
         </div>
       </header>

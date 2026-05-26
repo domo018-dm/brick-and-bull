@@ -8,7 +8,7 @@ export function Nav() {
   return (
     <nav className="nav">
       <div className="nav-inner">
-        <a className="logo" href="#">
+        <a className="logo" href="/">
           <span className="logo-mark">B&amp;B</span>
           <span className="logo-stack">
             <span className="logo-word">BRICK <span className="amp">&amp;</span> BULL</span>

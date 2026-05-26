@@ -7,10 +7,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="admin-shell">
       <header className="admin-header">
         <div className="admin-header-inner">
-          <div className="admin-header-brand">
+          <a className="admin-header-brand" href="/">
             <span className="logo-mark" style={{ width: 32, height: 32, fontSize: 13 }}>B&amp;B</span>
             <span className="mono admin-header-label">ADMIN</span>
-          </div>
+          </a>
           <nav className="admin-nav-links">
             <a href="/admin">Inventory</a>
             <a href="/admin/trucks/new">Add Truck</a>

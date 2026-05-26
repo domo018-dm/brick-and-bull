@@ -3,12 +3,12 @@ export function Footer() {
     <footer className="footer" id="contact">
       <div className="footer-top">
         <div className="footer-brand">
-          <div className="logo logo-foot">
+          <a className="logo logo-foot" href="/">
             <span className="logo-stack">
               <span className="logo-word">BRICK <span className="amp">&amp;</span> BULL</span>
               <span className="logo-sub">F-SERIES SPECIALISTS · EST. 2014</span>
             </span>
-          </div>
+          </a>
           <p className="footer-blurb">
             Independent dealer. Licensed in AZ, TX, CO, NM, UT, OK, KS &amp; AR.
             We find them cheap, get them right, and sell them straight.

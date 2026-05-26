@@ -592,6 +592,8 @@ button{font-family:inherit;cursor:pointer}
 .camera-review{display:flex;flex-direction:column;gap:10px;align-items:center;width:100%}
 .camera-review-btns{display:flex;gap:12px}
 .camera-upload-err{color:var(--accent);font-size:11px;letter-spacing:.04em;margin:0}
+.camera-controls .btn-ghost{color:var(--bg);border-color:rgba(241,236,226,.4)}
+.camera-controls .btn-ghost:hover{background:rgba(241,236,226,.12);color:var(--bg)}
 .admin-photo-or{font-size:10px;letter-spacing:.06em;color:var(--muted);margin:4px 0;text-align:center}
 .admin-file-input{font-size:13px;color:var(--fg-2);padding:10px 0;
   border:none;background:transparent;width:100%;cursor:pointer}

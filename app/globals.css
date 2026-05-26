@@ -193,6 +193,7 @@ button{font-family:inherit;cursor:pointer}
   border:4px solid currentColor;padding:8px 18px;z-index:3;background:rgba(241,236,226,.92)}
 .stamp-sold{color:var(--accent-deep)}
 .stamp-pending{color:var(--fg-2);font-size:32px;letter-spacing:.06em}
+.stamp-coming_soon{color:var(--fg);font-size:28px;letter-spacing:.04em}
 
 .tcard-featured{position:absolute;bottom:12px;left:12px;font-family:var(--display);font-weight:800;
   font-size:11px;letter-spacing:.08em;background:var(--accent);color:var(--ink-on-accent);
@@ -492,6 +493,7 @@ button{font-family:inherit;cursor:pointer}
   padding:4px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;
   text-transform:uppercase;border-radius:2px;cursor:pointer;transition:.12s;color:var(--fg-2)}
 .admin-status-btn:hover{border-color:var(--fg-2)}
+.admin-status-btn--coming_soon.is-active{background:#1a6bb5;border-color:#1a6bb5;color:#fff}
 .admin-status-btn--available.is-active{background:#2d6a4f;border-color:#2d6a4f;color:#fff}
 .admin-status-btn--pending.is-active{background:oklch(0.52 0.14 38);border-color:oklch(0.52 0.14 38);color:var(--ink-on-accent)}
 .admin-status-btn--sold.is-active{background:var(--fg);border-color:var(--fg);color:var(--bg)}

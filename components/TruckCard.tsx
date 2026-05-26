@@ -46,14 +46,14 @@ export function TruckCard({ truck: t, saved, onToggle, featured }: Props) {
         </button>
         {t.status !== 'available' && (
           <div className={`status-stamp stamp-${t.status}`}>
-            {t.status === 'sold' ? 'SOLD' : 'PENDING'}
+            {t.status === 'sold' ? 'SOLD' : t.status === 'coming_soon' ? 'COMING SOON' : 'PENDING'}
           </div>
         )}
       </div>
       <div className="tcard-body">
         <div className="tcard-headrow">
           <h3 className="tcard-h display">{t.year} <span>{t.model}</span></h3>
-          <div className="tcard-price">{fmt$(t.price)}</div>
+          <div className="tcard-price">{t.status === 'coming_soon' ? '—' : fmt$(t.price)}</div>
         </div>
         <div className="tcard-trim">{t.trim} · {t.engine} · {t.drive}</div>
         <dl className="tcard-specs">

@@ -19,7 +19,7 @@ export function TruckDetail({ truck: t }: { truck: Truck }) {
     { label: 'Mileage',      value: fmtMi(t.miles) },
     { label: 'Color',        value: t.color },
     { label: 'Location',     value: t.location },
-    { label: 'Status',       value: t.status.charAt(0).toUpperCase() + t.status.slice(1) },
+    { label: 'Status',       value: t.status === 'coming_soon' ? 'Coming Soon' : t.status.charAt(0).toUpperCase() + t.status.slice(1) },
   ]
 
   return (
@@ -51,7 +51,7 @@ export function TruckDetail({ truck: t }: { truck: Truck }) {
           <div className="tcard-era">{t.era_label}</div>
           {t.status !== 'available' && (
             <div className={`status-stamp stamp-${t.status}`}>
-              {t.status === 'sold' ? 'SOLD' : 'PENDING'}
+              {t.status === 'sold' ? 'SOLD' : t.status === 'coming_soon' ? 'COMING SOON' : 'PENDING'}
             </div>
           )}
         </div>
@@ -64,7 +64,9 @@ export function TruckDetail({ truck: t }: { truck: Truck }) {
               {t.year} <span className="tdetail-h1-model">{t.model}</span>
             </h1>
             <div className="tdetail-price">
-              {t.status === 'sold' ? <span className="tdetail-price-sold">SOLD</span> : fmt$(t.price)}
+              {t.status === 'sold' ? <span className="tdetail-price-sold">SOLD</span>
+                : t.status === 'coming_soon' ? <span className="tdetail-price-sold">COMING SOON</span>
+                : fmt$(t.price)}
             </div>
             <p className="tdetail-oneliner">{t.trim} · {t.engine} · {t.drive}</p>
           </div>
@@ -77,10 +79,14 @@ export function TruckDetail({ truck: t }: { truck: Truck }) {
           </dl>
 
           <div className="tdetail-actions">
-            {t.status !== 'sold' ? (
+            {t.status === 'available' || t.status === 'pending' ? (
               <a href="#inquiry" className="btn btn-primary">
                 {t.status === 'pending' ? 'Join the waitlist' : 'Inquire about this truck'}
                 <span className="arr">→</span>
+              </a>
+            ) : t.status === 'coming_soon' ? (
+              <a href="tel:5052049009" className="btn btn-primary">
+                Call to get notified <span className="arr">→</span>
               </a>
             ) : (
               <a href="/#inventory" className="btn btn-primary">

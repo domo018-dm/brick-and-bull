@@ -12,7 +12,7 @@ export interface Truck {
   miles: number
   color: string
   price: number
-  status: 'available' | 'pending' | 'sold'
+  status: 'available' | 'pending' | 'sold' | 'coming_soon'
   location: string
   image_url: string | null
   tone: string | null

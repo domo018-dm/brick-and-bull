@@ -31,7 +31,7 @@ export default async function TruckPage({ params }: Props) {
       <UtilityBar />
       <Nav />
       <TruckDetail truck={truck} />
-      {truck.status !== 'sold' && <TruckInquiry truck={truck} />}
+      {truck.status !== 'sold' && truck.status !== 'coming_soon' && <TruckInquiry truck={truck} />}
       <Footer />
     </div>
   )

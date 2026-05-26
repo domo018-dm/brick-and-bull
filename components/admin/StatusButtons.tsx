@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
 import { updateStatusAction } from '@/lib/actions'
 
-const STATUSES = ['available', 'pending', 'sold'] as const
+const STATUSES = ['coming_soon', 'available', 'pending', 'sold'] as const
 
 export function StatusButtons({ id, current }: { id: string; current: string }) {
   const router = useRouter()
@@ -32,7 +32,7 @@ export function StatusButtons({ id, current }: { id: string; current: string }) 
             onClick={() => set(s)}
             className={`admin-status-btn admin-status-btn--${s}${current === s ? ' is-active' : ''}`}
           >
-            {s}
+            {s === 'coming_soon' ? 'soon' : s}
           </button>
         ))}
       </div>

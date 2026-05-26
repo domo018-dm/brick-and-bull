@@ -114,7 +114,8 @@ export function TruckForm({ truck }: Props) {
           <F label="Price ($)" name="price" type="number" placeholder="28500" defaultValue={truck?.price} required />
           <div className="field">
             <span className="field-label mono">Status</span>
-            <select name="status" defaultValue={truck?.status ?? 'available'} required>
+            <select name="status" defaultValue={truck?.status ?? 'coming_soon'} required>
+              <option value="coming_soon">Coming Soon</option>
               <option value="available">Available</option>
               <option value="pending">Pending</option>
               <option value="sold">Sold</option>

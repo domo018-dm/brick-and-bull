@@ -19,6 +19,7 @@ const DRIVE_OPTIONS = [
 
 const STATUS_OPTIONS = [
   { id: 'all', label: 'All status' },
+  { id: 'coming_soon', label: 'Coming Soon' },
   { id: 'available', label: 'Available' },
   { id: 'pending', label: 'Pending' },
   { id: 'sold', label: 'Sold' },

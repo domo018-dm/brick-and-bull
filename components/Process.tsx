@@ -20,7 +20,7 @@ const STEPS = [
   {
     n: '04',
     t: 'SELL',
-    body: 'Trucks sell as-is. Pick up in Phoenix or we can help coordinate transport. Clean title, fair price, no games.',
+    body: 'Trucks are sold road-ready, documented, and fairly priced. Pick up in Phoenix or we can help coordinate transport. Clean title, no games.',
     proof: 'What you see is what you get.',
   },
 ]

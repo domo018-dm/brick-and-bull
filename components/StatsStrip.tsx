@@ -1,7 +1,6 @@
 const STATS = [
-  ['11', 'YEARS IN BUSINESS'],
+  ['3', 'YEARS IN BUSINESS'],
   ['200+', 'TRUCKS SOLD'],
-  ['8', 'STATES LICENSED'],
   ['80–91', 'F-SERIES ONLY'],
 ] as const
 

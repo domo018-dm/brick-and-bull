@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { createHash } from 'crypto'
+import Anthropic from '@anthropic-ai/sdk'
 import { getAdminClient } from './admin-supabase'
 
 // ── Auth ─────────────────────────────────────────────────────────────────────
@@ -121,7 +122,8 @@ function pickFields(formData: FormData) {
     price:      Number(formData.get('price')),
     status:     formData.get('status') as string,
     location:   formData.get('location') as string,
-    tone:       (formData.get('tone') as string) || null,
+    tone:        (formData.get('tone') as string) || null,
+    description: (formData.get('description') as string) || null,
   }
 }
 
@@ -185,6 +187,29 @@ export async function updateStatusAction(
     revalidatePath('/admin')
     revalidatePath(`/trucks/${id}`)
     return { success: true }
+  } catch (e) {
+    return { error: (e as Error).message }
+  }
+}
+
+// ── AI ────────────────────────────────────────────────────────────────────────
+
+export async function enhanceDescriptionAction(
+  raw: string,
+  context: string,
+): Promise<{ text: string } | { error: string }> {
+  try {
+    const client = new Anthropic()
+    const response = await client.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 512,
+      messages: [{
+        role: 'user',
+        content: `You write listing descriptions for Brick & Bull, a vintage Ford F-Series truck dealer. They find barn finds and cheap trucks (1980-1991 F-Series only), get them running and driving safely, and sell at fair prices.\n\nVoice: honest, mechanical, no fluff. Like someone who knows trucks talking to someone who also knows trucks. Short sentences. Specific details are good. No marketing speak. Don't start with "Introducing". Don't use the word "boasts".\n\n${context ? `Truck: ${context}\n\n` : ''}Rewrite this description in Brick & Bull's voice. Output only the rewritten text, no commentary:\n\n${raw}`,
+      }],
+    })
+    const text = response.content[0].type === 'text' ? response.content[0].text : ''
+    return { text }
   } catch (e) {
     return { error: (e as Error).message }
   }

@@ -23,6 +23,7 @@ export interface Truck {
   location: string
   image_url: string | null
   tone: string | null
+  description: string | null
   created_at: string
   images?: TruckImage[]
 }

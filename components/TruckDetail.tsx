@@ -75,6 +75,14 @@ export function TruckDetail({ truck: t }: { truck: Truck }) {
         </div>
       </div>
 
+      {/* ── Description */}
+      {t.description && (
+        <div className="tdetail-desc">
+          <div className="kicker"><span className="kicker-rule" />About This Truck</div>
+          <p className="tdetail-desc-text">{t.description}</p>
+        </div>
+      )}
+
       {/* ── Full specs */}
       <div className="tdetail-specs">
         <div className="kicker"><span className="kicker-rule" />Full Specifications</div>

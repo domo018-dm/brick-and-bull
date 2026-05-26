@@ -607,6 +607,20 @@ button{font-family:inherit;cursor:pointer}
 .admin-form-actions{display:flex;gap:12px;align-items:center;padding:28px 32px;
   border-top:1px solid var(--line);background:var(--bg-2)}
 
+/* Description / AI enhance */
+.admin-form-section textarea{width:100%;resize:vertical;min-height:120px;
+  font-family:var(--serif);font-size:15px;line-height:1.6;padding:10px 14px;
+  background:var(--bg);border:1px solid var(--line);color:var(--fg);border-radius:2px;
+  box-sizing:border-box;transition:border-color .12s}
+.admin-form-section textarea:focus{outline:none;border-color:var(--fg)}
+.admin-enhance-row{display:flex;align-items:center;gap:16px;margin-top:10px}
+.admin-enhance-btn{font-size:12px;padding:8px 18px}
+.admin-enhance-err{font-size:11px;color:var(--accent-deep);letter-spacing:.04em}
+
+/* Truck detail description */
+.tdetail-desc{max-width:780px;margin:0 auto;padding:40px 0 0}
+.tdetail-desc-text{font-size:17px;line-height:1.75;color:var(--fg-2);margin:12px 0 0}
+
 /* Responsive */
 @media(max-width:900px){
   .admin-form-grid{grid-template-columns:1fr}

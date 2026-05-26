@@ -18,12 +18,12 @@ export function Hero({ truck }: Props) {
         </div>
         <h1 className="hero-h display">
           F-SERIES<span className="hero-comma">,</span>
-          <br /> KEPT <span className="hero-em">HONEST</span>.
+          <br /> FOUND &amp; <span className="hero-em">FIXED</span>.
         </h1>
         <p className="hero-p">
-          We source, inspect, and document the seventh- and eighth-generation Ford F-series
-          for people who actually drive them. Bullnose and Bricknose only — no flippers,
-          no barn-find theatre. Honest iron with paperwork to match.
+          We hunt down seventh- and eighth-gen Ford F-Series trucks — barn finds, estate sales,
+          anything we can get cheap — bring them back to solid working order, and sell them
+          at a fair price. Bullnose and Bricknose only.
         </p>
         <div className="hero-ctas">
           <a className="btn btn-primary" href="#inventory">Browse inventory <span className="arr">→</span></a>

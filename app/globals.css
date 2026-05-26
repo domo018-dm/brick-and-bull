@@ -82,7 +82,7 @@ button{font-family:inherit;cursor:pointer}
   letter-spacing:.1em;color:var(--muted);margin-bottom:36px;flex-wrap:wrap}
 .eyebrow .dash{width:24px;height:1px;background:var(--muted)}
 .eyebrow .pipe{color:var(--line)}
-.hero-h{font-size:clamp(56px, 7.4vw, 112px);margin:0;letter-spacing:-.01em;color:var(--fg)}
+.hero-h{font-size:clamp(56px, 7.4vw, 112px);margin:0;letter-spacing:-.01em;line-height:1.05;color:var(--fg)}
 .hero-comma{color:var(--accent)}
 .hero-em{color:var(--accent);font-style:italic;font-family:'Big Shoulders Display',serif;font-weight:600}
 .hero-p{font-size:18px;line-height:1.5;max-width:48ch;color:var(--fg-2);margin:28px 0 36px;text-wrap:pretty}

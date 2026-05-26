@@ -136,11 +136,19 @@ export async function updateTruckAction(
   }
 }
 
-export async function updateStatusAction(id: string, status: string) {
-  const supabase = getAdminClient()
-  const { error } = await supabase.from('trucks').update({ status }).eq('id', id)
-  if (error) throw new Error(error.message)
-  revalidatePath('/')
-  revalidatePath('/admin')
-  revalidatePath(`/trucks/${id}`)
+export async function updateStatusAction(
+  id: string,
+  status: string,
+): Promise<{ error: string } | { success: true }> {
+  try {
+    const supabase = getAdminClient()
+    const { error } = await supabase.from('trucks').update({ status }).eq('id', id)
+    if (error) return { error: error.message }
+    revalidatePath('/')
+    revalidatePath('/admin')
+    revalidatePath(`/trucks/${id}`)
+    return { success: true }
+  } catch (e) {
+    return { error: (e as Error).message }
+  }
 }
